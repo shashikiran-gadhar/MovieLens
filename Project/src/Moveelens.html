@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title>MoveeLens</title>
+	<script src="https://www.google.com/jsapi?key=ABQIAAAA4gVDOpgiv9SIzUKHx5KX-hRi_j0U6kJrkFvY4-OX2XYmEAa76BTnA91JpzNLTmnGfFau_nZzWKkWAQ"></script>
+	<script type="text/javascript">
+	  google.load('search', '1');
+		
+      var imageSearch;
+	  var videoSearch;
+      function addPaginationLinks() {
+      
+        // To paginate search results, use the cursor function.
+        var cursor = imageSearch.cursor;
+        var curPage = cursor.currentPageIndex; // check what page the app is on
+        var pagesDiv = document.createElement('div');
+        for (var i = 0; i < cursor.pages.length; i++) {
+          var page = cursor.pages[i];
+          if (curPage == i) { 
+
+          // If we are on the current page, then don't make a link.
+            var label = document.createTextNode(' ' + page.label + ' ');
+            pagesDiv.appendChild(label);
+          } else {
+
+            // Create links to other pages using gotoPage() on the searcher.
+            var link = document.createElement('a');
+            link.href = 'javascript:imageSearch.gotoPage('+i+');';
+            link.innerHTML = page.label;
+            link.style.marginRight = '2px';
+            pagesDiv.appendChild(link);
+          }
+        }
+
+        var contentDiv = document.getElementById('content2');
+        contentDiv.appendChild(pagesDiv);
+      }
+
+	  function addPaginationLinks1() {
+      
+        // To paginate search results, use the cursor function.
+        var cursor = videoSearch.cursor;
+        var curPage = cursor.currentPageIndex; // check what page the app is on
+        var pagesDiv = document.createElement('div');
+        for (var i = 0; i < cursor.pages.length; i++) {
+          var page = cursor.pages[i];
+          if (curPage == i) { 
+
+          // If we are on the current page, then don't make a link.
+            var label = document.createTextNode(' ' + page.label + ' ');
+            pagesDiv.appendChild(label);
+          } else {
+
+            // Create links to other pages using gotoPage() on the searcher.
+            var link = document.createElement('a');
+            link.href = 'javascript:videoSearch.gotoPage('+i+');';
+            link.innerHTML = page.label;
+            link.style.marginRight = '2px';
+            pagesDiv.appendChild(link);
+          }
+        }
+
+        var contentDiv = document.getElementById('content1');
+        contentDiv.appendChild(pagesDiv);
+      }
+	  
+      function imagesearchComplete() {
+
+        // Check that we got results
+        if (imageSearch.results && imageSearch.results.length > 0) {
+
+          // Grab our content div, clear it.
+          var contentDiv = document.getElementById('content2');
+          contentDiv.innerHTML = '';
+
+          // Loop through our results, printing them to the page.
+          for (var i = 0; i < imageSearch.results.length / 4 ; i++) {
+            // For each result write it's title and image to the screen
+            var p = document.createElement('div');
+			  var x = document.createElement('a')
+              var a = document.createElement('img');
+			  var x1 = document.createElement('a')
+              var a1 = document.createElement('img');
+			  var x2 = document.createElement('a')
+              var a2 = document.createElement('img');
+			  var x3 = document.createElement('a')
+              var a3 = document.createElement('img');
+			  x.href = imageSearch.results[4 * i].url;
+              a.src = imageSearch.results[4 * i].tbUrl;
+			  a.width = 150;
+			  a.height = 150;
+			  a.hspace = 5;
+			  x1.href = imageSearch.results[4 * i + 1].url;
+              a1.src = imageSearch.results[4 * i + 1].tbUrl;
+			  a1.width = 150;
+			  a1.height = 150;
+			  a1.hspace = 5;
+			  x2.href = imageSearch.results[4 * i + 2].url;
+              a2.src = imageSearch.results[4 * i + 2].tbUrl;
+			  a2.width = 150;
+			  a2.height = 150;
+			  a2.hspace = 5;
+			  x3.href = imageSearch.results[4 * i + 3].url;
+              a3.src = imageSearch.results[4 * i + 3].tbUrl;
+			  a3.width = 150;
+			  a3.height = 150;
+			  a3.hspace = 5;
+
+              // Append search results to the HTML nodes
+			  x.appendChild(a);
+			  x1.appendChild(a1);
+			  x2.appendChild(a2);
+			  x3.appendChild(a3);
+              p.appendChild(x);
+              p.appendChild(x1);
+              p.appendChild(x2);
+              p.appendChild(x3);
+              contentDiv.appendChild(p);
+          }
+
+          // Now add links to additional pages of search results.
+          addPaginationLinks(imageSearch);
+        }
+      }
+	  
+	    function videosearchComplete() {
+
+          // Check that we got results
+          if (videoSearch.results && videoSearch.results.length > 0) {
+			var contentDiv = document.getElementById('content1');
+			contentDiv.innerHTML = '';
+            for (var i = 0; i < videoSearch.results.length / 4; i++) {
+
+              // Create HTML elements for search results
+			  var p = document.createElement('div');
+			  var x = document.createElement('a')
+              var a = document.createElement('img');
+			  var x1 = document.createElement('a')
+              var a1 = document.createElement('img');
+			  var x2 = document.createElement('a')
+              var a2 = document.createElement('img');
+			  var x3 = document.createElement('a')
+              var a3 = document.createElement('img');
+			  x.href = videoSearch.results[4 * i].playUrl;
+			  a.src = videoSearch.results[4 * i].tbUrl;
+			  a.width = 100;
+			  a.height = 100;
+			  a.hspace = 5;
+			  x1.href = videoSearch.results[4 * i + 1].playUrl;
+              a1.src = videoSearch.results[4 * i + 1].tbUrl;
+			  a1.width = 100;
+			  a1.height = 100;
+			  a1.hspace = 5;
+			  x2.href = videoSearch.results[4 * i + 2].playUrl;
+              a2.src = videoSearch.results[4 * i + 2].tbUrl;
+			  a2.width = 100;
+			  a2.height = 100;
+			  a2.hspace = 5;
+			  x3.href = videoSearch.results[4 * i + 3].playUrl;
+              a3.src = videoSearch.results[4 * i + 3].tbUrl;
+			  a3.width = 100;
+			  a3.height = 100;
+			  a3.hspace = 5;
+              
+              // Append search results to the HTML nodes
+			  x.appendChild(a);
+			  x1.appendChild(a1);
+			  x2.appendChild(a2);
+			  x3.appendChild(a3);
+              p.appendChild(x);
+              p.appendChild(x1);
+              p.appendChild(x2);
+              p.appendChild(x3);
+              contentDiv.appendChild(p);
+            }
+          }
+		  addPaginationLinks1(videoSearch);
+        }
+
+      function OnLoad() {
+	  
+		var searchControl = new google.search.SearchControl()
+		videoSearch = new google.search.VideoSearch();
+
+		// Set searchComplete as the callback function when a search is complete.  The
+        // videoSearch object will have results in it.
+        videoSearch.setSearchCompleteCallback(this, videosearchComplete, null);
+
+        imageSearch = new google.search.ImageSearch();
+        // Set searchComplete as the callback function when a search is 
+        // complete.  The imageSearch object will have results in it.
+        imageSearch.setSearchCompleteCallback(this, imagesearchComplete, null);
+
+        // Find me a beautiful car.
+        searchControl.addSearcher( imageSearch );
+		searchControl.addSearcher( videoSearch );
+		
+		// tell the searcher to draw itself and tell it where to attach
+		searchControl.draw(document.getElementById("content3"));
+
+		// execute an inital search
+		searchControl.execute("");
+	}
+    google.setOnLoadCallback(OnLoad);
+	</script>
+
+  </head>
+  <body bgcolor = "brown" >
+	<center>
+		<h1>
+			Search
+			<hr><br>
+		</h1>
+		<div id="content3"></div>
+	</center>
+  </body>
+</html>
